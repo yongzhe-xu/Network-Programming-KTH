@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <title>Chat Room</title>
+    <script src="/ChatRoom.js"></script>
+</head>
+
+
+<style>
+    body {
+        background-image: url('loginbg001.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
+
+
+<body onload="connect()" style="background-color:rgb(72, 70, 92);">
+
+<div align="center">
+    <label for="message">What you want to say?</label>
+</div>
+
+
+<div align="center">
+    <input type="text" id="message" class="form-control" placeholder="Your message here...">
+
+    <button id="send" class="btn btn-default" type="submit">Send</button>
+</div>
+<br>
+<br>
+<div align="center">
+    <button id="findPDF" class="btn btn-default" type="submit">Download</button>
+
+    <button id="uploadPDF" class="btn btn-default" type="submit">Upload</button>
+    <button id="changeRoom" class="btn btn-default" type="submit">Change Room</button>
+
+</div>
+
+<div align="center">
+    <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Messages</th>
+        </tr>
+        </thead>
+        <tbody id="greetings"></tbody>
+    </table>
+
+</div>
+</body>
+</html>

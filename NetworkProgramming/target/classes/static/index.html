@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Log in</title>
+<link type="text/css" rel="stylesheet" href="common.css" />
+<link type="text/css" rel="stylesheet" href="style.css" />
+<link type="text/css" rel="stylesheet" href="login.css" />
+    <script>
+
+        window.onload = function ()
+        {
+            var oLi = document.getElementById("tab").getElementsByTagName("li");
+            var oUl = document.getElementById("content").getElementsByTagName("ul");
+
+            for(var i = 0; i < oLi.length; i++)
+            {
+                oLi[i].index = i;
+                oLi[i].onclick = function ()
+                {
+                    for(var n = 0; n < oLi.length; n++)
+                        oLi[n].className="";
+
+                    this.className = "current";
+                    for(var n = 0; n < oUl.length; n++)
+                        oUl[n].style.display = "none";
+                    oUl[this.index].style.display = "block";
+                    if(oUl[this.index].title == ""){
+                        //$.parser.parse(oUl[this.index]);
+                        oUl[this.index].title = "parsed";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+
+<div class="log_main">
+   <h1>Welcome!</h1>
+   <div class="rygl_up">
+      <ul id="tab">
+         <li class="current">Register</li>
+         <li>Login</li>
+      </ul>
+      <div id="content">
+         <ul style="display:block;">
+             <div class="zhuce">
+                 <form name = "Register" action="./register" method="POST">
+                    <input type="text" placeholder="Username" class="zhuce_num" id="username_r" name="username_r"/>
+                    <input type="Password" placeholder="Password" class="zhuce_psd" id="password_r" name="password_r"/>
+                    <input type="submit" value="Register" class="zhuce_btn"/>
+                 </form>
+             </div>      
+         </ul>
+         <ul> 
+            <div class="zhuce">
+                <form name = "Login" action="./login" method="POST">
+                    <input type="text" placeholder="Username" class="denglu_num" id="username" name="username"/>
+                    <input type="Password" placeholder="Password" class="denglu_psd" id="password" name="password"/>
+                    <input type="submit" name="Submit" value="login" class="denglu_btn">
+                </form>
+             </div>            
+         </ul>
+      </div>
+   </div>
+</div>
+
+
+<div style=" clear:both"></div>
+</body>
+</body>
+</html>

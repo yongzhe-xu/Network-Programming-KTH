@@ -1,0 +1,91 @@
+<html >
+
+<style>
+    body {
+        background-image: url('loginbg001.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
+
+<body style="background-color:rgb(72, 70, 92);">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var roomId = null;
+    var username = null;
+
+    $.ajax({
+        type: 'GET',
+        enctype: 'multipart/form-data',
+        url: 'https://localhost:8443/getUserInfo',
+        contentType: false,
+        cache: false,
+        processData:false,
+        success: function(userInfo){
+            username = userInfo.username;
+            roomId = userInfo.roomId;
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+</script>
+
+<br><br><br>
+<dir align="center">
+    <form id="uploadPDF"  class="uploadPDF">
+        <label path="file">Select a file to upload</label>
+        <input type="file" name="file" id="file" accept="application/pdf"/>
+
+        <button type="submit" class="btn" id="upload" name="upload">Upload</button>
+
+        <ul id="result"></ul>
+    </form>
+</dir>
+
+
+<br><br>
+<dir align="center">
+    <button type="submit" class="btn" id="back" name="back">Back</button>
+</dir>
+
+</body>
+<script>
+    $(function () {
+        $("form").on('submit', function (e) {
+            e.preventDefault();
+        });
+        $( "#upload" ).click(function() { upload(); });
+        $( "#back" ).click(function() { back(); });
+    });
+
+    function upload(){
+        var form = $('form').get(0);
+        var data = new FormData(form);
+        data.append("roomId",roomId);
+        data.append("username", username);
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            url: 'https://localhost:8443/uploadfile',
+            data: data,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(response){
+                $("#result").html("<li>"+response.message+"</li>");
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function back()
+    {
+        window.location.href = "https://localhost:8443/GoBackToRoom";
+    }
+</script>
+</html>
